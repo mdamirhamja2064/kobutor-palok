@@ -1,0 +1,8 @@
+{
+  "appId": "com.hspigeonloft.kobutorpalok",
+  "appName": "কবুতর পালক",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": false
+  }
+}
