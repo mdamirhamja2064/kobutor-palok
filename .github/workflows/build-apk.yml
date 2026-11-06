@@ -26,15 +26,28 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Build offline libraries (Tailwind, fonts, Firebase, JSZip)
+        continue-on-error: true
+        run: bash scripts/build-vendor.sh
+
       - name: Add Android platform
         run: npx cap add android
 
-      - name: Add location permissions
+      - name: Generate app icon and splash screen
+        continue-on-error: true
+        run: npx capacitor-assets generate --android --iconBackgroundColor '#059669' --splashBackgroundColor '#059669'
+
+      - name: Add permissions (location, notifications)
         run: |
-          sed -i 's#</manifest>#    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />\n    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />\n</manifest>#' android/app/src/main/AndroidManifest.xml
+          sed -i 's#</manifest>#    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />\n    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />\n    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />\n    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />\n    <uses-permission android:name="android.permission.VIBRATE" />\n</manifest>#' android/app/src/main/AndroidManifest.xml
 
       - name: Sync web files
         run: npx cap sync android
+
+      - name: Use fixed signing key (so new APKs install over old ones)
+        run: |
+          mkdir -p ~/.android
+          cp scripts/debug.keystore ~/.android/debug.keystore
 
       - name: Build debug APK
         working-directory: android
