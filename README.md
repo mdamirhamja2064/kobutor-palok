@@ -1,21 +1,14 @@
-# কবুতর পালক - APK বানানোর নির্দেশনা
+# কবুতর পালক v3.0 - APK বানানোর নির্দেশনা
 
-## ধাপ ১: GitHub-এ আপলোড
-1. github.com এ ফ্রি অ্যাকাউন্ট খুলুন (থাকলে লগইন করুন)।
-2. New repository বানান, নাম দিন `kobutor-palok`। শেয়ার লিংক সবাই খুলতে পারবে চাইলে **Public** রাখুন।
-3. এই ZIP-এর ভেতরের সব ফাইল ও ফোল্ডার (`www`, `.github`, `package.json`, `capacitor.config.json`) রিপোতে আপলোড করুন।
-   - ওয়েবে "Add file → Upload files" দিয়ে সব টেনে ফেলুন।
-   - মনে রাখবেন `.github` ফোল্ডারটি অবশ্যই আপলোড হতে হবে (লুকানো ফোল্ডার)।
+## GitHub-এ আপলোড (সব ফাইল ও ফোল্ডার একসাথে)
+`www/`, `assets/`, `scripts/`, `.github/`, `package.json`, `capacitor.config.json`, `README.md`
 
-## ধাপ ২: APK বানানো
-1. রিপোর **Actions** ট্যাবে যান। "Build APK" চলতে শুরু করবে (৫-১০ মিনিট)।
-   - নিজে চালাতে চাইলে: Actions → Build APK → Run workflow।
-2. সবুজ টিক এলে রিপোর ডান পাশে **Releases** এ যান। সেখানে `kobutor-palok.apk` ফাইল পাবেন।
+- Add file → Upload files → ফোল্ডারসহ টেনে ফেলুন → Commit changes
+- `.github/workflows/build-apk.yml` আছে কিনা দেখে নিন।
+- ফোল্ডার আপলোড না হলে Add file → Create new file দিয়ে নাম লিখুন (যেমন `scripts/build-vendor.sh`)।
 
-## ধাপ ৩: ফোনে ইনস্টল
-1. APK ফাইল ফোনে ডাউনলোড করুন।
-2. ফাইলে ট্যাপ করুন, "অজানা উৎস থেকে ইনস্টল" অনুমতি দিন, তারপর Install।
-3. শেয়ার করতে Releases পেজের লিংক বা APK ফাইল পাঠিয়ে দিন।
+## APK নামানো
+Actions ট্যাবে সবুজ টিক এলে (৫-১০ মিনিট) Releases থেকে `kobutor-palok.apk` নামান।
 
-## অ্যাপ আপডেট
-`www/index.html` বদলে আবার আপলোড করলেই নতুন APK তৈরি হবে।
+## আপডেটের আগে
+অ্যাপ → সেটিংস থেকে "ফুল ব্যাকআপ" নিয়ে রাখুন। নতুন APK আগেরটার ওপর ইনস্টল করলে ডেটা থাকে।
