@@ -23,6 +23,16 @@ jobs:
           distribution: temurin
           java-version: 17
 
+      - name: Arrange uploaded files into folders
+        run: |
+          mkdir -p assets scripts
+          for f in icon-only.png icon-foreground.png icon-background.png splash.png splash-dark.png; do
+            if [ -f "$f" ]; then mv "$f" assets/; fi
+          done
+          if [ -f build-vendor.sh ]; then mv build-vendor.sh scripts/; fi
+          if [ -f debug.keystore ]; then mv debug.keystore scripts/; fi
+          ls assets scripts
+
       - name: Install dependencies
         run: npm install
 
